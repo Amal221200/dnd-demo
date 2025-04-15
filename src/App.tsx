@@ -41,7 +41,7 @@ const User = ({ user }: { user: { id: string, name: string } }) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: user.id });
 
   return (
-    <div style={{ transform: CSS.Transform.toString(transform), transition }} className="border px-4 py-2 rounded bg-blue-400" ref={setNodeRef} {...attributes} {...listeners}>
+    <div style={{ transform: CSS.Transform.toString(transform), transition }} className="border px-4 py-2 rounded bg-blue-400 touch-none" ref={setNodeRef} {...attributes} {...listeners}>
       <h1>{user.name}</h1>
     </div>
   )
