@@ -37,7 +37,7 @@ const App = () => {
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <SortableContext items={users} strategy={verticalListSortingStrategy}>
-        <div className="h-dvh grid place-content-center gap-y-2">
+        <div className="h-[200dvh] grid place-content-center gap-y-2">
           {users.map(user => (
             <User key={user.id} user={user} />
           ))}
