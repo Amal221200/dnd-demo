@@ -48,10 +48,10 @@ const App = () => {
 }
 
 const User = ({ user }: { user: { id: string, name: string } }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, active } = useSortable({ id: user.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: user.id });
 
   return (
-    <div style={{ transform: CSS.Transform.toString(transform), transition, touchAction: 'none', scale: active?.id === user.id ? 1.3 : 1 }} className="border px-4 py-2 rounded bg-blue-400" ref={setNodeRef} {...attributes} {...listeners}>
+    <div style={{ transform: CSS.Transform.toString(transform), transition, touchAction: isDragging ? 'none' : 'auto', scale: isDragging ? 1.3 : 1 }} className="border px-4 py-2 rounded bg-blue-400" ref={setNodeRef} {...attributes} {...listeners}>
       <h1>{user.name}</h1>
     </div>
   )
