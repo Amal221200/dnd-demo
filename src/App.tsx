@@ -13,7 +13,17 @@ const usersData = [
 
 const App = () => {
   const [users, setUsers] = useState(usersData);
-  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
+  const sensors = useSensors(useSensor(PointerSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    }
+  }), useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    }
+  }));
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -38,10 +48,10 @@ const App = () => {
 }
 
 const User = ({ user }: { user: { id: string, name: string } }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: user.id });
+  const { attributes, listeners, setNodeRef, transform, transition, active } = useSortable({ id: user.id });
 
   return (
-    <div style={{ transform: CSS.Transform.toString(transform), transition }} className="border px-4 py-2 rounded bg-blue-400 touch-none" ref={setNodeRef} {...attributes} {...listeners}>
+    <div style={{ transform: CSS.Transform.toString(transform), transition, touchAction: 'manipulation', scale: active?.id === user.id ? 1.3 : 1 }} className="border px-4 py-2 rounded bg-blue-400 touch-none" ref={setNodeRef} {...attributes} {...listeners}>
       <h1>{user.name}</h1>
     </div>
   )
