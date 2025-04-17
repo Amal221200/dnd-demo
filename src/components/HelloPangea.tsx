@@ -1,7 +1,7 @@
 import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd';
 import { useState } from 'react';
-import { usersData } from './DNDKit';
 import { arrayMove } from '@dnd-kit/sortable';
+import { usersData } from '../data';
 
 const HelloPangea = () => {
     const [users, setUsers] = useState(usersData);

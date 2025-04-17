@@ -2,14 +2,7 @@ import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSen
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
-
-export const usersData = [
-  { id: '1', name: 'John Doe' },
-  { id: '2', name: 'Jane Smith' },
-  { id: '3', name: 'Alice Johnson' },
-  { id: '4', name: 'Bob Brown' },
-  { id: '5', name: 'Charlie Davis' },
-]
+import { usersData } from "../data";
 
 const DNDKit = () => {
   const [users, setUsers] = useState(usersData);
@@ -37,12 +30,13 @@ const DNDKit = () => {
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <SortableContext items={users} strategy={verticalListSortingStrategy}>
-        <div className="h-[200dvh] grid place-content-center gap-y-2">
+        <div className="h-[100dvh] grid place-content-center gap-y-2">
           {users.map(user => (
             <User key={user.id} user={user} />
           ))}
         </div>
       </SortableContext>
+      <div className="h-dvh bg-black" />
     </DndContext>
   )
 }
@@ -51,7 +45,7 @@ const User = ({ user }: { user: { id: string, name: string } }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: user.id });
 
   return (
-    <div style={{ transform: CSS.Transform.toString(transform), transition, touchAction: isDragging ? 'none' : 'auto', scale: isDragging ? 1.3 : 1 }} className="border px-4 py-2 rounded bg-blue-400" ref={setNodeRef} {...attributes} {...listeners}>
+    <div style={{ transform: CSS.Transform.toString(transform), transition, touchAction: 'manipulation', scale: isDragging ? 1.3 : 1 }} className="border px-4 py-2 rounded bg-blue-400" ref={setNodeRef} {...attributes} {...listeners}>
       <h1>{user.name}</h1>
     </div>
   )

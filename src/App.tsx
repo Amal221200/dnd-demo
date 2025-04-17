@@ -1,9 +1,9 @@
-import HelloPangea from "./components/HelloPangea";
+import DNDKit from "./components/DNDKit";
 
 const App = () => {
 
   return (
-    <HelloPangea />
+    <DNDKit />
   )
 }
 
